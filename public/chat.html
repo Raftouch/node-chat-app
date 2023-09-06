@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Chat Bar</title>
+</head>
+
+<body>
+    <div class="h-screen flex flex-col justify-between p-5 border bg-slate-800 text-slate-100">
+        <header class="flex justify-between">
+            <h1>Chat Bar</h1>
+            <a href="index.html" class="px-2 py-1 border">Leave Room</a>
+        </header>
+        <main class="chat-main flex gap-10 justify-center">
+            <div class="chat-sidebar border p-4 flex flex-col gap-5">
+                <div>
+                    <h3>Room Name:</h3>
+                    <h2 id="room-name">Spitz</h2>
+                </div>
+                <div>
+                    <h3>Users</h3>
+                    <ul id="users">
+                        <li>Anna</li>
+                        <li>John</li>
+                        <li>Mary</li>
+                        <li>Paul</li>
+                        <li>Louis</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="chat-messages flex flex-col gap-10 border p-4">
+                <div class="message border p-1">
+                    <p class="meta">Paul <span>9:12pm</span></p>
+                    <p class="text">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
+                        repudiandae.
+                    </p>
+                </div>
+                <div class="message border p-1">
+                    <p class="meta">Louis <span>9:15pm</span></p>
+                    <p class="text">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
+                        repudiandae.
+                    </p>
+                </div>
+            </div>
+        </main>
+        <div class="chat-form-container">
+            <form class="flex justify-between" id="chat-form">
+                <input class="min-w-[80%] py-2 px-1 bg-transparent border" id="msg" type="text" placeholder="Enter Message" autocomplete="off"
+                    required />
+                <button class="py-2 px-1 border">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
