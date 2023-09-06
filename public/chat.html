@@ -14,7 +14,7 @@
             <h1>Chat Bar</h1>
             <a href="index.html" class="px-2 py-1 border">Leave Room</a>
         </header>
-        <main class="chat-main flex gap-10 justify-center">
+        <main class="chat-main flex gap-10">
             <div class="chat-sidebar border p-4 flex flex-col gap-5">
                 <div>
                     <h3>Room Name:</h3>
@@ -31,7 +31,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="chat-messages flex flex-col gap-10 border p-4">
+            <div class="chat-messages flex flex-col flex-1 gap-10 border p-4">
                 <div class="message border p-1">
                     <p class="meta">Paul <span>9:12pm</span></p>
                     <p class="text">
@@ -49,14 +49,15 @@
             </div>
         </main>
         <div class="chat-form-container">
-            <form class="flex justify-between" id="chat-form">
-                <input class="min-w-[80%] py-2 px-1 bg-transparent border" id="msg" type="text" placeholder="Enter Message" autocomplete="off"
+            <form class="flex" id="chat-form">
+                <input class="py-2 px-1 flex-1 bg-transparent border" id="msg" type="text" placeholder="Enter Message" autocomplete="off"
                     required />
                 <button class="py-2 px-1 border">Send</button>
             </form>
         </div>
     </div>
 
+    <script src="/socket.io/socket.io.js"></script>
     <script src="js/main.js"></script>
 </body>
 
