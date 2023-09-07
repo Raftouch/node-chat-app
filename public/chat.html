@@ -15,13 +15,13 @@
             <a href="index.html" class="px-2 py-1 border">Leave Room</a>
         </header>
         <main class="chat-main flex gap-10">
-            <div class="chat-sidebar border p-4 flex flex-col gap-5">
+            <div class="chat-sidebar p-4 flex flex-col gap-5">
                 <div>
-                    <h3>Room Name:</h3>
+                    <h3 class="font-bold">Room Name:</h3>
                     <h2 id="room-name">Spitz</h2>
                 </div>
                 <div>
-                    <h3>Users</h3>
+                    <h3 class="font-bold">Users</h3>
                     <ul id="users">
                         <li>Anna</li>
                         <li>John</li>
@@ -31,22 +31,7 @@
                     </ul>
                 </div>
             </div>
-            <div id="chat-messages" class="flex flex-col flex-1 gap-10 border p-4">
-                <div class="message border p-1">
-                    <p class="meta">Paul <span>9:12pm</span></p>
-                    <p class="text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-                        repudiandae.
-                    </p>
-                </div>
-                <div class="message border p-1">
-                    <p class="meta">Louis <span>9:15pm</span></p>
-                    <p class="text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-                        repudiandae.
-                    </p>
-                </div>
-            </div>
+            <div id="chat-messages" class="h-[70vh] flex flex-col flex-1 gap-10 border p-4 overflow-auto"></div>
         </main>
         <div class="chat-form-container">
             <form class="flex" id="chat-form">
