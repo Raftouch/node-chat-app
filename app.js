@@ -3,6 +3,12 @@ const path = require('path')
 const http = require('http')
 const socketio = require('socket.io')
 const formatMsg = require('./utils/message')
+const {
+  userJoinedRoom,
+  getCurrentUser,
+  userLeftRoom,
+  getRoomUsers,
+} = require('./utils/user')
 
 require('dotenv').config()
 const port = process.env.PORT || 3000
@@ -17,16 +23,34 @@ const botName = 'Chat Bar'
 
 io.on('connection', (socket) => {
   socket.on('joinedRoom', ({ username, room }) => {
-    socket.emit('msg', formatMsg(botName, 'Welcome to Chat Bar'))
-    socket.broadcast.emit('msg', formatMsg(botName, 'A user has joined the chat'))
+    const user = userJoinedRoom(socket.id, username, room)
+    socket.join(user.room)
+
+    socket.emit(
+      'msg',
+      formatMsg(botName, `Hi ${user.username}, welcome to Chat Bar!`)
+    )
+
+    socket.broadcast
+      .to(user.room)
+      .emit('msg', formatMsg(botName, `${user.username} has joined the chat`))
   })
-  
+
   socket.on('chatMsg', (msg) => {
-    io.emit('msg', formatMsg('User', msg))
+    const user = getCurrentUser(socket.id)
+
+    io.to(user.room).emit('msg', formatMsg(user.username, msg))
   })
-  
+
   socket.on('disconnect', () => {
-    io.emit('msg', formatMsg(botName, 'A user has left the chat'))
+    const user = userLeftRoom(socket.id)
+
+    if (user) {
+      io.to(user.room).emit(
+        'msg',
+        formatMsg(botName, `${user.username} has left the chat`)
+      )
+    }
   })
 })
 
