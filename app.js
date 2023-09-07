@@ -16,14 +16,17 @@ app.use(express.static(path.join(__dirname, 'public')))
 const botName = 'Chat Bar'
 
 io.on('connection', (socket) => {
-  socket.emit('msg', formatMsg(botName, 'Welcome to Chat Bar'))
-  socket.broadcast.emit('msg', formatMsg(botName, 'A user has joined the chat'))
-  socket.on('disconnect', () => {
-    io.emit('msg', formatMsg(botName, 'A user has left the chat'))
+  socket.on('joinedRoom', ({ username, room }) => {
+    socket.emit('msg', formatMsg(botName, 'Welcome to Chat Bar'))
+    socket.broadcast.emit('msg', formatMsg(botName, 'A user has joined the chat'))
   })
-
+  
   socket.on('chatMsg', (msg) => {
     io.emit('msg', formatMsg('User', msg))
+  })
+  
+  socket.on('disconnect', () => {
+    io.emit('msg', formatMsg(botName, 'A user has left the chat'))
   })
 })
 

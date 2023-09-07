@@ -1,13 +1,17 @@
 const chatForm = document.getElementById('chat-form')
-// const chatMessages = document.getElementById('chat-messages')
+
+const queryString = window.location.search
+const urlParams = new URLSearchParams(queryString)
+const username = urlParams.get('username')
+const room = urlParams.get('room')
 
 const socket = io()
+
+socket.emit('joinedRoom', { username, room })
 
 socket.on('msg', (msg) => {
   console.log(msg)
   outputMessage(msg)
-
-  // chatMessages.scrollTop = chatMessages.scrollHeight
 })
 
 chatForm.addEventListener('submit', (e) => {
@@ -24,9 +28,9 @@ function outputMessage(msg) {
   const div = document.createElement('div')
   div.classList.add('message')
   div.innerHTML = `
-  <p class="meta">Louis <span>9:15pm</span></p>
+  <p class="meta">${msg.user} <span>${msg.time}</span></p>
   <p class="text">
-      ${msg}
+      ${msg.text}
   </p>
   `
   document.getElementById('chat-messages').appendChild(div)
