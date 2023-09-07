@@ -1,0 +1,5 @@
+- [x] create static html
+- [x] connect to server
+- [x] install socket.io
+- [x] add dynamics to messaging part
+- [x] add dynamics to room & users part
