@@ -1,4 +1,6 @@
 const chatForm = document.getElementById('chat-form')
+const roomName = document.getElementById('room-name')
+const userList = document.getElementById('users')
 
 const queryString = window.location.search
 const urlParams = new URLSearchParams(queryString)
@@ -8,6 +10,11 @@ const room = urlParams.get('room')
 const socket = io()
 
 socket.emit('joinedRoom', { username, room })
+
+socket.on('roomUsers', ({ room, users }) => {
+  outputRoom(room)
+  outputUsers(users)
+})
 
 socket.on('msg', (msg) => {
   console.log(msg)
@@ -34,4 +41,14 @@ function outputMessage(msg) {
   </p>
   `
   document.getElementById('chat-messages').appendChild(div)
+}
+
+function outputRoom(room) {
+  roomName.innerText = room
+}
+
+function outputUsers(users) {
+  userList.innerHTML = `
+    ${users.map((user) => `<li>${user.username}</li>`).join('')}
+  `
 }

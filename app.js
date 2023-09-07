@@ -34,6 +34,11 @@ io.on('connection', (socket) => {
     socket.broadcast
       .to(user.room)
       .emit('msg', formatMsg(botName, `${user.username} has joined the chat`))
+
+    io.to(user.room).emit('roomUsers', {
+      room: user.room,
+      users: getRoomUsers(user.room),
+    })
   })
 
   socket.on('chatMsg', (msg) => {
@@ -50,6 +55,11 @@ io.on('connection', (socket) => {
         'msg',
         formatMsg(botName, `${user.username} has left the chat`)
       )
+
+      io.to(user.room).emit('roomUsers', {
+        room: user.room,
+        users: getRoomUsers(user.room),
+      })
     }
   })
 })
